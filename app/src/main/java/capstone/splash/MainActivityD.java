@@ -11,7 +11,7 @@ import android.content.Intent;
 import android.widget.Button;
 import android.widget.ImageView;
 
-public class MainActivityE_1 extends AppCompatActivity {
+public class MainActivityD extends AppCompatActivity {
     TextView up_freq;
     ImageView tuned_notify;
     Button start_tune;
@@ -36,12 +36,12 @@ public class MainActivityE_1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_e_1);
+        setContentView(R.layout.activity_main_d);
 
 
         updateGraphHandler = new Handler();
         switchHandler = new Handler();
-        graphingCanvas = (Draw_Graph) findViewById(R.id.graphE_1);
+        graphingCanvas = (Draw_Graph) findViewById(R.id.graphD);
 
         // Declare Objects
         up_freq = (TextView) findViewById(R.id.freq);
@@ -80,7 +80,7 @@ public class MainActivityE_1 extends AppCompatActivity {
                 graphingCanvas.updateGraph(t,true,false);
             } finally {
                 if(stop_start)
-                updateGraphHandler.postDelayed(runningLoop, delay);
+                    updateGraphHandler.postDelayed(runningLoop, delay);
             }
         }
     };
@@ -90,17 +90,17 @@ public class MainActivityE_1 extends AppCompatActivity {
         @Override
         public void run(){
             int delay1 = 50;
-                try {
-                    if (flag_switch_activity) {
-                        SystemClock.sleep(1000);
-                        Intent toy = new Intent(MainActivityE_1.this, MainActivityA.class);
-                        startActivity(toy);
-                    }
-                } finally {
-                    if (!flag_switch_activity) {
-                        switchHandler.postDelayed(runningLoop_Switch, delay1);
-                    }
+            try {
+                if (flag_switch_activity) {
+                    SystemClock.sleep(1000);
+                    Intent toy = new Intent(MainActivityD.this, MainActivityG.class);
+                    startActivity(toy);
                 }
+            } finally {
+                if (!flag_switch_activity) {
+                    switchHandler.postDelayed(runningLoop_Switch, delay1);
+                }
+            }
         }
     };
 

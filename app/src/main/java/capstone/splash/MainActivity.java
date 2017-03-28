@@ -33,14 +33,14 @@ public class MainActivity extends AppCompatActivity {
         but1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent toy = new Intent(MainActivity.this, MainActivity2.class);
+                Intent toy = new Intent(MainActivity.this, MainActivityD.class);
                 startActivity(toy);
             }
         });
         but2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent toy = new Intent(MainActivity.this, MainActivity3.class);
+                Intent toy = new Intent(MainActivity.this, MainActivityA.class);
                 startActivity(toy);
             }
         });

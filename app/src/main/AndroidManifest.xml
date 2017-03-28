@@ -25,10 +25,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity3"
+            android:name=".MainActivityA"
             android:parentActivityName=".MainActivity">
             <intent-filter>
-                <action android:name="capstone.splash.MAINACTIVITY3" />
+                <action android:name="capstone.splash.MAINACTIVITYA" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -52,6 +52,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".MainActivityD"
+            android:parentActivityName=".MainActivity">
+            <intent-filter>
+                <action android:name="capstone.splash.MAINACTIVITYD" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".MainActivityE_1"
             android:parentActivityName=".MainActivity">
             <intent-filter>
@@ -69,15 +78,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity2"
-            android:parentActivityName=".MainActivity">
-            <intent-filter>
-                <action android:name="capstone.splash.MAINACTIVITY2" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
             android:name="com.google.android.gms.version"

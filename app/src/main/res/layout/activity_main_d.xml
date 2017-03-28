@@ -10,7 +10,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="capstone.splash.MainActivity2">
+    tools:context="capstone.splash.MainActivityD">
 
     <TextView
         android:text="Desired Frequency:"
@@ -67,7 +67,7 @@
 
 
     <capstone.splash.Draw_Graph
-        android:id="@+id/graph7"
+        android:id="@+id/graphD"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="250dp"
@@ -84,14 +84,14 @@
         android:layout_marginBottom="7dp" />
 
     <TextView
-        android:text="A"
+        android:text="D"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:id="@+id/textView3"
         android:textSize="80sp"
         android:textAlignment="center"
-        android:textColor="@color/colorA"
+        android:textColor="@color/colorD"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -103,9 +103,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/start_button"
-        android:background="@color/colorA"
+        android:background="@color/colorD"
         android:textColor="@color/colorPrimary"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>
