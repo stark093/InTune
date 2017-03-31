@@ -75,7 +75,7 @@ public class BaseApplication extends Application {
                     btSocket.connect();//start connection
                 }
             }
-            catch (IOException e)
+            catch (IOException | IllegalArgumentException e)
             {
                 ConnectSuccess = false;//if the try failed, you can check the exception here
             }
