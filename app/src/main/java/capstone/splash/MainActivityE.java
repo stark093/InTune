@@ -141,7 +141,7 @@ public class MainActivityE extends AppCompatActivity {
     }
 
     public void updateImage() {
-        doneTuningCircle.setImageDrawable(getResources().getDrawable(R.drawable.pink_circ));
+        doneTuningCircle.setImageDrawable(getResources().getDrawable(R.drawable.tuned_pink));
     }
 
     private View.OnClickListener startListener = new View.OnClickListener() {

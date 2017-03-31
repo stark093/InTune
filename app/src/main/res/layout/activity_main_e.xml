@@ -76,7 +76,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/purp_circ"
+        app:srcCompat="@drawable/tuned_e"
         android:id="@+id/tune_notify"
         android:layout_above="@+id/des_freq"
         android:layout_marginBottom="7dp" />

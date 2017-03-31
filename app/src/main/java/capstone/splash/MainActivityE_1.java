@@ -123,7 +123,7 @@ public class MainActivityE_1 extends AppCompatActivity {
     }
 
     public void updateImage() {
-        doneTuningCircle.setImageDrawable(getResources().getDrawable(R.drawable.pink_circ));
+        doneTuningCircle.setImageDrawable(getResources().getDrawable(R.drawable.tuned_pink));
     }
 
     public void stopTuning(){
