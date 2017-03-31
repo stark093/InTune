@@ -1,0 +1,34 @@
+<resources>
+
+    <!-- App Theme -->
+    <style name="AppTheme" parent="@style/Theme.AppCompat">
+        <item name="android:actionBarStyle">@style/AppActionBarTheme</item>
+        <item name="actionBarStyle">@style/AppActionBarTheme</item>
+    </style>
+
+    <!-- Action Bar Theme -->
+    <style name="AppActionBarTheme" parent="@style/Widget.AppCompat.Light.ActionBar">
+        <item name="background">@color/blue_main</item>
+        <item name="android:actionOverflowButtonStyle">@color/blue_accent</item>
+        <item name="colorPrimary">@color/blue_main</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+    </style>
+
+    <style name="layout_width_and_height_wrap">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="layout_width_and_height_match">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:background">#2196F3</item>
+    </style>
+
+</resources>

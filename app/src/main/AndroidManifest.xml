@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="capstone.splash">
+
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <application
+        android:name=".BaseApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/guitarhead"
+        android:label="InTune"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="InTune">
+            <intent-filter>
+                <action android:name="capstone.splash.MAINACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".DeviceList"
+            android:label="Manage Devices">
+            <intent-filter>
+                <action android:name="capstone.splash.MAINACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivityA"
+            android:parentActivityName=".MainActivity">
+            <intent-filter>
+                <action android:name="capstone.splash.MAINACTIVITYA" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivityG"
+            android:parentActivityName=".MainActivity">
+            <intent-filter>
+                <action android:name="capstone.splash.MAINACTIVITYG" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivityB"
+            android:parentActivityName=".MainActivity">
+            <intent-filter>
+                <action android:name="capstone.splash.MAINACTIVITYB" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivityD"
+            android:parentActivityName=".MainActivity">
+            <intent-filter>
+                <action android:name="capstone.splash.MAINACTIVITYD" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivityE_1"
+            android:parentActivityName=".MainActivity">
+            <intent-filter>
+                <action android:name="capstone.splash.MAINACTIVITYE_1" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivityE"
+            android:parentActivityName=".MainActivity">
+            <intent-filter>
+                <action android:name="capstone.splash.MAINACTIVITYE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
