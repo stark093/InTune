@@ -10,7 +10,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="capstone.splash.MainActivity2">
+    tools:context="capstone.splash.MainActivityG">
 
     <TextView
         android:text="Desired Frequency:"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/freq"
         android:textSize="18sp"
-        android:text='" " Hz'
+        android:text='---'
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_alignBaseline="@+id/textView5"
@@ -42,9 +42,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView6"
+        android:id="@+id/desired_freq_val"
         android:textSize="18sp"
-        android:text="146.3 Hz"
+        android:text="---"
         android:layout_alignBaseline="@+id/des_freq"
         android:layout_alignBottom="@+id/des_freq"
         android:layout_alignLeft="@+id/freq"

@@ -1,18 +1,19 @@
 package capstone.splash;
 
-import android.app.Activity;
+
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +23,19 @@ public class MainActivity extends AppCompatActivity {
     public Button but4;
     public Button but5;
     public Button but6;
+    public Button but7;
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_main);
+        init();
+    }
+
 
     public void init(){
         but1 = (Button)findViewById(R.id.button13);
@@ -30,9 +44,12 @@ public class MainActivity extends AppCompatActivity {
         but4 = (Button)findViewById(R.id.button15);
         but5 = (Button)findViewById(R.id.button14);
         but6 = (Button)findViewById(R.id.button5);
+        but7 = (Button)findViewById(R.id.DeviceButton);
+
         but1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+
                 Intent toy = new Intent(MainActivity.this, MainActivityD.class);
                 startActivity(toy);
             }
@@ -72,14 +89,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(toy);
             }
         });
+        but7.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent toy = new Intent(MainActivity.this, DeviceList.class);
+                startActivity(toy);
+            }
+        });
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_main);
-        init();
-    }
+
 }

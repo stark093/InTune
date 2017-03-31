@@ -2,10 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="capstone.splash">
 
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <application
+        android:name=".BaseApplication"
         android:allowBackup="true"
         android:icon="@drawable/guitarhead"
-        android:label="@string/app_name"
+        android:label="InTune"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -17,7 +24,16 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:label="InTune">
+            <intent-filter>
+                <action android:name="capstone.splash.MAINACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".DeviceList"
+            android:label="Manage Devices">
             <intent-filter>
                 <action android:name="capstone.splash.MAINACTIVITY" />
 
@@ -78,11 +94,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

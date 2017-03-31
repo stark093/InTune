@@ -12,21 +12,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 public class MainActivityG extends AppCompatActivity {
-    TextView up_freq;
-    ImageView tuned_notify;
-    Button start_tune;
-    private volatile Thread th;
-    boolean stop_start;
-    double i = 130.0;
-    double amp = 16.0;
+    TextView currentFreqTextView;
+    TextView desiredTextView;
+    ImageView doneTuningCircle;
+    Button tuneButton;
+    boolean running = false;
+
+    double desiredFrequency = 196.0;
+    int currentString = 3;
+
     private Draw_Graph graphingCanvas;
     private Handler updateGraphHandler;
-    private Handler switchHandler;
-    double [] q = new double [100];
-    double [] t = new double [100];
-    int p = 0;
-    boolean flag = false;
-    boolean flag_switch_activity = false;
+    double [] graphArray = new double [100];
+    int phase = 0;
+    Pitch_Algorithm pitch_algorithm;
+    int mostRecentSequenceNumber = 0;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -38,24 +38,30 @@ public class MainActivityG extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_g);
 
-
         updateGraphHandler = new Handler();
-        switchHandler = new Handler();
         graphingCanvas = (Draw_Graph) findViewById(R.id.graphG);
 
         // Declare Objects
-        up_freq = (TextView) findViewById(R.id.freq);
-        tuned_notify = (ImageView) findViewById(R.id.tune_notify);
+        desiredTextView = (TextView) findViewById(R.id.desired_freq_val);
+        desiredTextView.setText(String.format("%.1f Hz",desiredFrequency));
+        currentFreqTextView = (TextView) findViewById(R.id.freq);
+        doneTuningCircle = (ImageView) findViewById(R.id.tune_notify);
 
         // Set up button
-        start_tune = (Button) findViewById(R.id.start_button);
-        start_tune.setOnClickListener(startListener);
+        tuneButton = (Button) findViewById(R.id.start_button);
+        tuneButton.setOnClickListener(startListener);
 
-        // Set up variables
-        double y, x;
-        x = -5.0;
-        stop_start = false;
-        runningLoop_Switch.run();
+        startTuning();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        running = false;
+        if(pitch_algorithm!=null) {
+            pitch_algorithm.kill();
+            pitch_algorithm = null;
+        }
     }
 
     Runnable runningLoop = new Runnable(){
@@ -63,99 +69,85 @@ public class MainActivityG extends AppCompatActivity {
         public void run(){
             int delay = 50;
             try {
-                for (int i=0;i <100;i++){
-                    q[i]=i + p;
-                }
-                p = p + 1;
-                if (!flag) {
-                    for (int i = 0; i < 100; i++) {
-                        t[i] = amp*Math.sin(q[i]/4.0);
+                if(pitch_algorithm!=null) {
+                    double[] frequencyInformation = pitch_algorithm.getFreq();
+                    double freq = frequencyInformation[0];
+                    int sequenceNumber = (int)frequencyInformation[1];
+                    if(sequenceNumber!=mostRecentSequenceNumber){
+                        updateFrequency(freq);
+                        mostRecentSequenceNumber = sequenceNumber;
                     }
-                } else if (flag) {
-                    for (int i = 0; i < 100; i++) {
-                        t[i] = 0;
+                    if(freq!=0) {
+                        double freqDifference = Math.abs(desiredFrequency - freq);
+                        if(freqDifference<0.5){
+                            doneTuning();
+                        }
+                        updateGraph(freqDifference);
                     }
-                    flag_switch_activity = true;
+
                 }
-                graphingCanvas.updateGraph(t,true,false);
             } finally {
-                if(stop_start)
+                if(running)
                     updateGraphHandler.postDelayed(runningLoop, delay);
             }
         }
     };
 
-
-    Runnable runningLoop_Switch = new Runnable(){
-        @Override
-        public void run(){
-            int delay1 = 50;
-            try {
-                if (flag_switch_activity) {
-                    SystemClock.sleep(1000);
-                    Intent toy = new Intent(MainActivityG.this, MainActivityB.class);
-                    startActivity(toy);
-                }
-            } finally {
-                if (!flag_switch_activity) {
-                    switchHandler.postDelayed(runningLoop_Switch, delay1);
-                }
-            }
+    private void doneTuning(){
+        running = false;
+        if(pitch_algorithm!=null) {
+            pitch_algorithm.kill();
+            pitch_algorithm = null;
         }
-    };
+        updateImage();
+        Intent i = new Intent(MainActivityG.this, MainActivityB.class);
+        startActivity(i);
+        finish();
+    }
 
-
-    private void startThread() {
-        th = new Thread(new Runnable() {
-            public void run() {
-                while (true) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            updateFrequency(i);
-                            if (i < 146) {
-                                amp = 146.0 - i;
-                                i = i + 1;
-                                flag = false;
-                            } else {
-                                amp = 0;
-                                flag = true;
-                                updateFrequency(146.3);
-                                updateImage(R.drawable.pink_circ);
-                            }
-
-                        }
-                    });
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-        th.start();
+    public void updateGraph(double graphAmplitude){
+        if(phase>43){
+            phase=0;
+        }else{
+            phase++;
+        }
+        for (int i = 0; i < 100; i++) {
+            graphArray[i] = graphAmplitude*Math.sin((i/4. + (phase)/7.));
+        }
+        graphingCanvas.updateGraph(graphArray,true,false);
     }
 
     public void updateFrequency(double frequencyToDisplay) {
-        String printStr = Double.toString(frequencyToDisplay) + " Hz";
-        up_freq.setText(printStr);
+
+        currentFreqTextView.setText(String.format("%.3f Hz", frequencyToDisplay));
     }
 
-    public void updateImage(int tuneImage) {
-        tuned_notify.setImageDrawable(getResources().getDrawable(tuneImage));
+    public void updateImage() {
+        doneTuningCircle.setImageDrawable(getResources().getDrawable(R.drawable.pink_circ));
+    }
+
+    public void stopTuning(){
+        running = false;
+        if(pitch_algorithm!=null) {
+            pitch_algorithm.kill();
+            pitch_algorithm = null;
+        }
+        tuneButton.setText("TUNE");
+    }
+
+    public void startTuning(){
+        running = true;
+        pitch_algorithm = new Pitch_Algorithm(currentString);
+        runningLoop.run();
+        tuneButton.setText("STOP");
     }
 
     private View.OnClickListener startListener = new View.OnClickListener() {
         public void onClick(View v) {
-            if (stop_start == false) {
-                startThread();
-                stop_start = true;
-                runningLoop.run();
-                start_tune.setText("STOP");
+            if (running == false) {
+                startTuning();
             } else {
-                stop_start = false;
-                start_tune.setText("TUNE");
+                stopTuning();
             }
         }
     };

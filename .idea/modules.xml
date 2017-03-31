@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/InTune_UI.iml" filepath="$PROJECT_DIR$/InTune_UI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/InTune.iml" filepath="$PROJECT_DIR$/InTune.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
