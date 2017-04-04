@@ -11,12 +11,18 @@ import android.content.Intent;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import static java.lang.Thread.sleep;
+
 public class MainActivityG extends AppCompatActivity {
     TextView currentFreqTextView;
     TextView desiredTextView;
     ImageView doneTuningCircle;
     Button tuneButton;
     boolean running = false;
+
+    int directionChoice = 1;
+    int rotationNumber = 0;
+    double lastDifference = 0;
 
     double desiredFrequency = 196.0;
     int currentString = 3;
@@ -51,7 +57,7 @@ public class MainActivityG extends AppCompatActivity {
         tuneButton = (Button) findViewById(R.id.start_button);
         tuneButton.setOnClickListener(startListener);
 
-        startTuning();
+       startTuning();
     }
 
     @Override
@@ -64,6 +70,27 @@ public class MainActivityG extends AppCompatActivity {
         }
     }
 
+    private void rotate(double difference){
+        lastDifference = difference;
+        rotationNumber++;
+
+        //After the first rotation, check what happened.
+        if((Math.abs(lastDifference-difference))>1) {
+            if (lastDifference > difference) {
+                //we know it's going in the right direction. Do nothing.
+
+            } else {
+                //it's going in the wrong direction. Reverse it.
+                directionChoice = -1;
+            }
+        }
+        if(difference>0){
+            ((BaseApplication) getApplicationContext()).turnX(directionChoice*10);
+        }else{
+            ((BaseApplication) getApplicationContext()).turnX(directionChoice*-10);
+        }
+    }
+
     Runnable runningLoop = new Runnable(){
         @Override
         public void run(){
@@ -73,17 +100,23 @@ public class MainActivityG extends AppCompatActivity {
                     double[] frequencyInformation = pitch_algorithm.getFreq();
                     double freq = frequencyInformation[0];
                     int sequenceNumber = (int)frequencyInformation[1];
-                    if(sequenceNumber!=mostRecentSequenceNumber){
-                        updateFrequency(freq);
-                        mostRecentSequenceNumber = sequenceNumber;
-                    }
+
                     if(freq!=0) {
-                        double freqDifference = Math.abs(desiredFrequency - freq);
-                        if(freqDifference<0.5){
+                        double freqDifference = (desiredFrequency - freq);
+                        if(Math.abs(freqDifference)<0.5){
                             doneTuning();
                         }
-                        updateGraph(freqDifference);
+
+
+                        if(sequenceNumber!=mostRecentSequenceNumber){
+                            rotate(freqDifference);
+                            updateFrequency(freq);
+                            mostRecentSequenceNumber = sequenceNumber;
+                        }
+
                     }
+                    updateGraph(Math.abs(lastDifference));
+                    System.out.println("loop");
 
                 }
             } finally {
@@ -101,6 +134,11 @@ public class MainActivityG extends AppCompatActivity {
         }
         updateImage();
         Intent i = new Intent(MainActivityG.this, MainActivityB.class);
+        try {
+            sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         startActivity(i);
         finish();
     }

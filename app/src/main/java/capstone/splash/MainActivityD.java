@@ -11,6 +11,8 @@ import android.content.Intent;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import static java.lang.Thread.sleep;
+
 public class MainActivityD extends AppCompatActivity {
     TextView currentFreqTextView;
     TextView desiredTextView;
@@ -20,6 +22,11 @@ public class MainActivityD extends AppCompatActivity {
 
     double desiredFrequency = 146.8;
     int currentString = 4;
+
+    int directionChoice = 1;
+    int rotationNumber = 0;
+    double lastDifference = 0;
+
 
     private Draw_Graph graphingCanvas;
     private Handler updateGraphHandler;
@@ -64,7 +71,27 @@ public class MainActivityD extends AppCompatActivity {
         }
     }
 
+    private void rotate(double difference){
+        lastDifference = difference;
+        rotationNumber++;
 
+        //After the first rotation, check what happened.
+        //After the first rotation, check what happened.
+        if((Math.abs(lastDifference-difference))>1) {
+            if (lastDifference > difference) {
+                //we know it's going in the right direction. Do nothing.
+
+            } else {
+                //it's going in the wrong direction. Reverse it.
+                directionChoice = -1;
+            }
+        }
+        if(difference>0){
+            ((BaseApplication) getApplicationContext()).turnX(directionChoice*10);
+        }else{
+            ((BaseApplication) getApplicationContext()).turnX(-directionChoice*-10);
+        }
+    }
 
     Runnable runningLoop = new Runnable(){
         @Override
@@ -75,17 +102,23 @@ public class MainActivityD extends AppCompatActivity {
                     double[] frequencyInformation = pitch_algorithm.getFreq();
                     double freq = frequencyInformation[0];
                     int sequenceNumber = (int)frequencyInformation[1];
-                    if(sequenceNumber!=mostRecentSequenceNumber){
-                        updateFrequency(freq);
-                        mostRecentSequenceNumber = sequenceNumber;
-                    }
+
                     if(freq!=0) {
-                        double freqDifference = Math.abs(desiredFrequency - freq);
-                        if(freqDifference<0.5){
+                        double freqDifference = (desiredFrequency - freq);
+                        if(Math.abs(freqDifference)<0.5){
                             doneTuning();
                         }
-                        updateGraph(freqDifference);
+
+
+                        if(sequenceNumber!=mostRecentSequenceNumber){
+                            rotate(freqDifference);
+                            updateFrequency(freq);
+                            mostRecentSequenceNumber = sequenceNumber;
+                        }
+
                     }
+                    updateGraph(Math.abs(lastDifference));
+                    System.out.println("loop");
 
                 }
             } finally {
@@ -103,6 +136,11 @@ public class MainActivityD extends AppCompatActivity {
         }
         updateImage();
         Intent i = new Intent(MainActivityD.this, MainActivityG.class);
+        try {
+            sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         startActivity(i);
         finish();
     }

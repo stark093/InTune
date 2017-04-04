@@ -20,7 +20,7 @@ public class Pitch_Algorithm {
     int lowLim;
     int currentString;
 
-    double[] currentWindowFrequencies = new double[512];
+    double[] currentWindowFrequencies = new double[2048];
     int zeroCount = 0;
     int currentWindowIndex = 0;
     boolean listening=false;
@@ -115,7 +115,7 @@ public class Pitch_Algorithm {
     private Runnable pitchAlgorithmRunningLoop = new Runnable(){
         @Override
         public void run(){
-            int delay = 15;
+            int delay = 50;
 
             try {
                 audioData = audioRecorder.getAudioData();
@@ -140,7 +140,7 @@ public class Pitch_Algorithm {
 //                graphingCanvas.updateGraph(signal_processor.getPlot(data,"cepstral"), false, false);
                 //endTime = System.currentTimeMillis();
                 //System.out.println((endTime-startTime) + ", " + num + ", " + largestFreq);
-                System.out.println(freq + ", " + currentString + ", " + zeroCount + " " + listening);
+                //System.out.println(freq + ", " + currentString + ", " + zeroCount + " " + listening);
 
 
             } finally {

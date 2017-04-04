@@ -41,7 +41,30 @@ public class BaseApplication extends Application {
 
     public void connectNewBT(String newAddress){
         address = newAddress;
+        resetConnection();
         new ConnectBT().execute();
+    }
+
+    private void resetConnection() {
+        try {
+            if (btSocket.getInputStream() != null) {
+                btSocket.getInputStream().close();
+            }
+        }
+            catch (IOException e) {}
+
+        try {
+            if (btSocket.getOutputStream() != null) {
+                btSocket.getOutputStream().close();
+            }
+        }
+        catch (IOException e) {}
+
+        if (btSocket != null) {
+            try {btSocket.close();} catch (Exception e) {}
+            btSocket = null;
+        }
+        isBtConnected = false;
     }
 
     private class ConnectBT extends AsyncTask<Void, Void, Void>  // UI thread
@@ -105,6 +128,8 @@ public class BaseApplication extends Application {
     public void turnX(int X)
     {
         String XString = new Integer(X).toString();
+
+        XString.concat(":");
         if (btSocket!=null)
         {
             try
