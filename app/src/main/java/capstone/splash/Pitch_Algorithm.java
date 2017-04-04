@@ -55,28 +55,28 @@ public class Pitch_Algorithm {
         currentString = string;
         switch (string){
             case 6://fattest
-                lowLim = 72;
-                highLim = 92;
+                lowLim = 60;
+                highLim = 100;
                 break;
             case 5:
-                lowLim = 100;
-                highLim = 120;
+                lowLim = 90;
+                highLim = 130;
                 break;
             case 4:
-                lowLim = 136;
-                highLim = 156;
+                lowLim = 126;
+                highLim = 166;
                 break;
             case 3:
-                lowLim = 186;
-                highLim = 206;
+                lowLim = 176;
+                highLim = 216;
                 break;
             case 2:
-                lowLim = 237;
-                highLim = 257;
+                lowLim = 227;
+                highLim = 267;
                 break;
             case 1://thinnest
-                lowLim = 320;
-                highLim=340;
+                lowLim = 310;
+                highLim=350;
                 break;
         }
     }
