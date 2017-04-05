@@ -18,6 +18,8 @@ public class MainActivityD extends AppCompatActivity {
     TextView desiredTextView;
     ImageView doneTuningCircle;
     Button tuneButton;
+    private long mLastClickTime = 0;
+
     boolean running = false;
 
     double desiredFrequency = 146.8;
@@ -86,10 +88,11 @@ public class MainActivityD extends AppCompatActivity {
                 directionChoice = -1;
             }
         }
+
         if(difference>0){
-            ((BaseApplication) getApplicationContext()).turnX(directionChoice*10);
+            ((BaseApplication) getApplicationContext()).turnX((int)(directionChoice*difference*20.1+0));
         }else{
-            ((BaseApplication) getApplicationContext()).turnX(-directionChoice*-10);
+            ((BaseApplication) getApplicationContext()).turnX((int)(directionChoice*difference*10-10));
         }
     }
 
@@ -118,7 +121,6 @@ public class MainActivityD extends AppCompatActivity {
 
                     }
                     updateGraph(Math.abs(lastDifference));
-                    System.out.println("loop");
 
                 }
             } finally {
@@ -184,6 +186,12 @@ public class MainActivityD extends AppCompatActivity {
 
     private View.OnClickListener startListener = new View.OnClickListener() {
         public void onClick(View v) {
+            // mis-clicking prevention, using threshold of 1000 ms
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 3000){
+                return;
+
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
             if (running == false) {
                 startTuning();
             } else {

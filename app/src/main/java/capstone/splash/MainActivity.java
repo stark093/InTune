@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         but1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-
+                but1.setEnabled(false);
                 Intent toy = new Intent(MainActivity.this, MainActivityD.class);
                 startActivity(toy);
             }
@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         but2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                but2.setEnabled(false);
                 Intent toy = new Intent(MainActivity.this, MainActivityA.class);
                 startActivity(toy);
             }
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         but3.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                but3.setEnabled(false);
                 Intent toy = new Intent(MainActivity.this, MainActivityG.class);
                 startActivity(toy);
             }
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         but4.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                but4.setEnabled(false);
                 Intent toy = new Intent(MainActivity.this, MainActivityB.class);
                 startActivity(toy);
             }
@@ -78,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         but5.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                but5.setEnabled(false);
                 Intent toy = new Intent(MainActivity.this, MainActivityE.class);
                 startActivity(toy);
             }
@@ -85,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         but6.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                but6.setEnabled(false);
                 Intent toy = new Intent(MainActivity.this, MainActivityE_1.class);
                 startActivity(toy);
             }
@@ -92,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         but7.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                but7.setEnabled(false);
                 Intent toy = new Intent(MainActivity.this, DeviceList.class);
                 startActivity(toy);
             }

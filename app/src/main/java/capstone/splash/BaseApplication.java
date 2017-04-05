@@ -129,7 +129,7 @@ public class BaseApplication extends Application {
     {
         String XString = new Integer(X).toString();
 
-        XString.concat(":");
+        XString = XString.concat(":");
         if (btSocket!=null)
         {
             try

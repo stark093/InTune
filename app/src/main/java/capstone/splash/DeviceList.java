@@ -86,7 +86,6 @@ public class DeviceList extends AppCompatActivity
     }
 
     private void connectNewDevice(String address){
-        System.out.println("here");
         ((BaseApplication)this.getApplicationContext()).connectNewBT(address);
     }
     private AdapterView.OnItemClickListener myListClickListener = new AdapterView.OnItemClickListener()

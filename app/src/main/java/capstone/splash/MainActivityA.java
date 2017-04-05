@@ -2,6 +2,7 @@ package capstone.splash;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
@@ -17,6 +18,8 @@ public class MainActivityA extends AppCompatActivity {
     TextView desiredTextView;
     ImageView doneTuningCircle;
     Button tuneButton;
+    private long mLastClickTime = 0;
+
     boolean running = false;
 
     double desiredFrequency = 110.0;
@@ -82,9 +85,9 @@ public class MainActivityA extends AppCompatActivity {
             }
         }
         if(difference>0){
-            ((BaseApplication) getApplicationContext()).turnX(directionChoice*10);
+            ((BaseApplication) getApplicationContext()).turnX((int)(directionChoice*difference*20.1+10));
         }else{
-            ((BaseApplication) getApplicationContext()).turnX(-directionChoice*-10);
+            ((BaseApplication) getApplicationContext()).turnX((int)(directionChoice*difference*10-10));
         }
     }
 
@@ -113,7 +116,7 @@ public class MainActivityA extends AppCompatActivity {
 
                     }
                     updateGraph(Math.abs(lastDifference));
-                    System.out.println("loop");
+
 
                 }
             } finally {
@@ -179,6 +182,12 @@ public class MainActivityA extends AppCompatActivity {
 
     private View.OnClickListener startListener = new View.OnClickListener() {
         public void onClick(View v) {
+            // mis-clicking prevention, using threshold of 1000 ms
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 3000){
+                return;
+
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
             if (running == false) {
                 startTuning();
             } else {

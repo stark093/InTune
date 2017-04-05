@@ -20,6 +20,8 @@ public class MainActivityE_1 extends AppCompatActivity {
     Button tuneButton;
     boolean running = false;
 
+    private long mLastClickTime = 0;
+
     double desiredFrequency = 82.4;
     int currentString = 6;
 
@@ -86,9 +88,9 @@ public class MainActivityE_1 extends AppCompatActivity {
             }
         }
         if(difference>0){
-            ((BaseApplication) getApplicationContext()).turnX(directionChoice*10);
+            ((BaseApplication) getApplicationContext()).turnX((int)(directionChoice*difference*18.8+10));
         }else{
-            ((BaseApplication) getApplicationContext()).turnX(-directionChoice*-10);
+            ((BaseApplication) getApplicationContext()).turnX((int)(directionChoice*10.9*difference-10));
         }
     }
 
@@ -117,7 +119,6 @@ public class MainActivityE_1 extends AppCompatActivity {
 
                     }
                     updateGraph(Math.abs(lastDifference));
-                    System.out.println("loop");
 
                 }
             } finally {
@@ -183,6 +184,12 @@ public class MainActivityE_1 extends AppCompatActivity {
 
     private View.OnClickListener startListener = new View.OnClickListener() {
         public void onClick(View v) {
+            // mis-clicking prevention, using threshold of 1000 ms
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 3000){
+                return;
+
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
             if (running == false) {
                 startTuning();
             } else {
