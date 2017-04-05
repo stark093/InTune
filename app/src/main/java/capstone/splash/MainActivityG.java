@@ -23,6 +23,7 @@ public class MainActivityG extends AppCompatActivity {
 
 
     boolean running = false;
+    boolean done = false;
 
     int directionChoice = 1;
     int rotationNumber = 0;
@@ -109,12 +110,15 @@ public class MainActivityG extends AppCompatActivity {
                     if(freq!=0) {
                         double freqDifference = (desiredFrequency - freq);
                         if(Math.abs(freqDifference)<0.5){
+                            done = true;
                             doneTuning();
                         }
 
 
                         if(sequenceNumber!=mostRecentSequenceNumber){
-                            rotate(freqDifference);
+                            if(!done) {
+                                rotate(freqDifference);
+                            }
                             updateFrequency(freq);
                             mostRecentSequenceNumber = sequenceNumber;
                         }

@@ -21,6 +21,7 @@ public class MainActivityD extends AppCompatActivity {
     private long mLastClickTime = 0;
 
     boolean running = false;
+    boolean done = false;
 
     double desiredFrequency = 146.8;
     int currentString = 4;
@@ -109,12 +110,15 @@ public class MainActivityD extends AppCompatActivity {
                     if(freq!=0) {
                         double freqDifference = (desiredFrequency - freq);
                         if(Math.abs(freqDifference)<0.5){
+                            done = true;
                             doneTuning();
                         }
 
 
                         if(sequenceNumber!=mostRecentSequenceNumber){
-                            rotate(freqDifference);
+                            if(!done) {
+                                rotate(freqDifference);
+                            }
                             updateFrequency(freq);
                             mostRecentSequenceNumber = sequenceNumber;
                         }

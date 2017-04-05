@@ -19,6 +19,7 @@ public class MainActivityE_1 extends AppCompatActivity {
     ImageView doneTuningCircle;
     Button tuneButton;
     boolean running = false;
+    boolean done = false;
 
     private long mLastClickTime = 0;
 
@@ -107,12 +108,15 @@ public class MainActivityE_1 extends AppCompatActivity {
                     if(freq!=0) {
                         double freqDifference = (desiredFrequency - freq);
                         if(Math.abs(freqDifference)<0.5){
+                            done=true;
                             doneTuning();
                         }
 
 
                         if(sequenceNumber!=mostRecentSequenceNumber){
-                            rotate(freqDifference);
+                            if(!done) {
+                                rotate(freqDifference);
+                            }
                             updateFrequency(freq);
                             mostRecentSequenceNumber = sequenceNumber;
                         }

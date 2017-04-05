@@ -21,6 +21,7 @@ public class MainActivityE extends AppCompatActivity {
     private long mLastClickTime = 0;
 
     boolean running = false;
+    boolean done = false;
 
     double desiredFrequency = 329.6;
     int currentString = 1;
@@ -104,16 +105,17 @@ public class MainActivityE extends AppCompatActivity {
                     double[] frequencyInformation = pitch_algorithm.getFreq();
                     double freq = frequencyInformation[0];
                     int sequenceNumber = (int)frequencyInformation[1];
-
                     if(freq!=0) {
                         double freqDifference = (desiredFrequency - freq);
                         if(Math.abs(freqDifference)<0.5){
+                            done = true;
                             doneTuning();
                         }
 
-
                         if(sequenceNumber!=mostRecentSequenceNumber){
-                            rotate(freqDifference);
+                            if(!done) {
+                                rotate(freqDifference);
+                            }
                             updateFrequency(freq);
                             mostRecentSequenceNumber = sequenceNumber;
                         }
