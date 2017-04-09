@@ -195,6 +195,7 @@ public class MainActivityG extends AppCompatActivity {
                 return;
 
             }
+            ((BaseApplication) getApplicationContext()).turnX((int)(112));
             mLastClickTime = SystemClock.elapsedRealtime();
             if (running == false) {
 

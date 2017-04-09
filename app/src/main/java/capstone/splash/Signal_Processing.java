@@ -199,11 +199,11 @@ public class Signal_Processing {
 
         double retVal = 0;
 
-        double[] maxFreq_magnitude = get_maxFreq_magnitude123(getCepstral123(dataSet),126,147);
+        double[] maxFreq_magnitude = get_maxFreq_magnitude123(getCepstral123(dataSet),250,300);
 
 
         if(maxFreq_magnitude[1]*100>noiseThreshold){
-            retVal = maxFreq_magnitude[0];
+            retVal = 2*maxFreq_magnitude[0];
         }
 
         return retVal;
@@ -255,7 +255,7 @@ public class Signal_Processing {
 
         double retVal = 0;
 
-        double[] maxFreq_magnitude = get_maxFreq_magnitude123(getCepstral123(dataSet),205,245);
+        double[] maxFreq_magnitude = get_maxFreq_magnitude123(getCepstral123(dataSet),200,250);
 
 
         if(maxFreq_magnitude[1]*100>noiseThreshold){
@@ -461,7 +461,9 @@ public class Signal_Processing {
         try {
             averagedPeak = weightedAveragePeak(
                     new double[]{
-
+                            cepstral[maxi - 9],
+                            cepstral[maxi - 8],
+                            cepstral[maxi - 7],
                             cepstral[maxi - 6],
                             cepstral[maxi - 5],
                             cepstral[maxi - 4],
@@ -473,7 +475,11 @@ public class Signal_Processing {
                             cepstral[maxi + 2],
                             cepstral[maxi + 3],
                             cepstral[maxi + 4],
-                            cepstral[maxi + 5]
+                            cepstral[maxi + 5],
+                            cepstral[maxi + 6],
+                            cepstral[maxi + 7],
+                            cepstral[maxi + 8],
+                            cepstral[maxi + 9]
 
                     }, maxi);
         }catch(java.lang.ArrayIndexOutOfBoundsException e) {

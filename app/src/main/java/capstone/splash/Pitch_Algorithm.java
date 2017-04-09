@@ -15,22 +15,22 @@ import static java.lang.Thread.sleep;
 public class Pitch_Algorithm {
     private Handler pitchAlgorithmMainHandler;
     private Audio_Record_Implementation audioRecorder;
-    double[] audioData;
-    int highLim;
-    int lowLim;
-    int currentString;
+    private double[] audioData;
+    private int highLim;
+    private int lowLim;
+    private int currentString;
 
-    double[] currentWindowFrequencies = new double[2048];
-    int zeroCount = 0;
-    int currentWindowIndex = 0;
-    boolean listening=false;
+    private double[] currentWindowFrequencies = new double[2048];
+    private int zeroCount = 0;
+    private int currentWindowIndex = 0;
+    private boolean listening=false;
 
     /* TWEAK THESE VARIABLES*/
-    int numToIgnore=3;
-    int zerosToWaitFor = 2;
+    private int numToIgnore=4;
+    private int zerosToWaitFor = 4;
 
-    double updatedFrequency = 0;
-    int updateSequenceNumber = 1;
+    private double updatedFrequency = 0;
+    private int updateSequenceNumber = 1;
 
     boolean run;
     public Pitch_Algorithm(int string){
@@ -102,7 +102,7 @@ public class Pitch_Algorithm {
         return retArr;
     }
 
-    public synchronized void updateValues(double freqVal){
+    private synchronized void updateValues(double freqVal){
         updatedFrequency = freqVal;
         updateSequenceNumber++;
     }
@@ -140,7 +140,7 @@ public class Pitch_Algorithm {
 //                graphingCanvas.updateGraph(signal_processor.getPlot(data,"cepstral"), false, false);
                 //endTime = System.currentTimeMillis();
                 //System.out.println((endTime-startTime) + ", " + num + ", " + largestFreq);
-                //System.out.println(freq + ", " + currentString + ", " + zeroCount + " " + listening);
+                System.out.println(freq + ", " + currentString + ", " + zeroCount + " " + listening);
 
 
             } finally {
