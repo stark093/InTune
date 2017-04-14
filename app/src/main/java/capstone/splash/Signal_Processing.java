@@ -227,11 +227,11 @@ public class Signal_Processing {
 
         double retVal = 0;
 
-        double[] maxFreq_magnitude = get_maxFreq_magnitude123(getCepstral123(dataSet),166,196);
+        double[] maxFreq_magnitude = get_maxFreq_magnitude123(getCepstral123(dataSet),228,315);
 
 
         if(maxFreq_magnitude[1]*100>noiseThreshold){
-            retVal = maxFreq_magnitude[0];
+            retVal = 1.5*maxFreq_magnitude[0];
         }
 
         return retVal;
