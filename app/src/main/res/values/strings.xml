@@ -1,3 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Splash</string>
+
+    <string name="app_name">MyAndroidApp</string>
+    <string name="tuning_prompt">Alternate Tuning</string>
+
+    <string-array name="tuning_arrays">
+        <item>Standard Tuning</item>
+        <item>Open A</item>
+        <item>Open C</item>
+        <item>Open G</item>
+        <item>Open D</item>
+    </string-array>
+
 </resources>

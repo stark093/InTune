@@ -10,10 +10,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.Toast;
+import android.widget.ArrayAdapter;
+import android.view.View.OnClickListener;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     public Button but5;
     public Button but6;
     public Button but7;
+    public static String spinner_item;
+    private Spinner spinner1;
 
 
 
@@ -33,9 +42,31 @@ public class MainActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+        addListenerOnSpinnerItemSelection();
         init();
+
     }
 
+    public void addListenerOnSpinnerItemSelection() {
+        spinner1 = (Spinner) findViewById(R.id.spinner1);
+        spinner1.setOnItemSelectedListener(new CustomOnItemSelectedListener());
+    }
+
+    public class CustomOnItemSelectedListener implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+
+        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+            spinner_item = parent.getItemAtPosition(pos).toString();
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> arg0) {
+            // TODO Auto-generated method stub
+        }
+
+        @Override
+        public void onClick(View view) {
+        }
+    }
 
     public void init(){
         but1 = (Button)findViewById(R.id.button13);
@@ -49,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         but1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                but1.setEnabled(false);
+
                 Intent toy = new Intent(MainActivity.this, MainActivityD.class);
                 startActivity(toy);
             }
@@ -57,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
         but2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                but2.setEnabled(false);
                 Intent toy = new Intent(MainActivity.this, MainActivityA.class);
                 startActivity(toy);
             }
@@ -65,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
         but3.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                but3.setEnabled(false);
                 Intent toy = new Intent(MainActivity.this, MainActivityG.class);
                 startActivity(toy);
             }
@@ -73,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
         but4.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                but4.setEnabled(false);
                 Intent toy = new Intent(MainActivity.this, MainActivityB.class);
                 startActivity(toy);
             }
@@ -81,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
         but5.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                but5.setEnabled(false);
                 Intent toy = new Intent(MainActivity.this, MainActivityE.class);
                 startActivity(toy);
             }
@@ -89,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
         but6.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                but6.setEnabled(false);
                 Intent toy = new Intent(MainActivity.this, MainActivityE_1.class);
                 startActivity(toy);
             }
@@ -97,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
         but7.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                but7.setEnabled(false);
                 Intent toy = new Intent(MainActivity.this, DeviceList.class);
                 startActivity(toy);
             }
