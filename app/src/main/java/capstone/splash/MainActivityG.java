@@ -29,7 +29,7 @@ public class MainActivityG extends AppCompatActivity {
     int rotationNumber = 0;
     double lastDifference = 0;
 
-    double desiredFrequency = 196.0;
+    double desiredFrequency;
     int currentString = 3;
 
     private Draw_Graph graphingCanvas;
@@ -57,6 +57,10 @@ public class MainActivityG extends AppCompatActivity {
         desiredTextView.setText(String.format("%.1f Hz",desiredFrequency));
         currentFreqTextView = (TextView) findViewById(R.id.freq);
         doneTuningCircle = (ImageView) findViewById(R.id.tune_notify);
+
+        //Get Desired Frequency
+        ((BaseApplication) getApplicationContext()).setFrequency(3);
+        desiredFrequency = ((BaseApplication) getApplicationContext()).getFrequency();
 
         // Set up button
         tuneButton = (Button) findViewById(R.id.start_button);

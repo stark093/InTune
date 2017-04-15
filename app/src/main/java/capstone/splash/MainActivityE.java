@@ -23,7 +23,7 @@ public class MainActivityE extends AppCompatActivity {
     boolean running = false;
     boolean done = false;
 
-    double desiredFrequency = 329.6;
+    double desiredFrequency;
     int currentString = 1;
 
     int directionChoice = 1;
@@ -56,6 +56,10 @@ public class MainActivityE extends AppCompatActivity {
         desiredTextView.setText(String.format("%.1f Hz",desiredFrequency));
         currentFreqTextView = (TextView) findViewById(R.id.freq);
         doneTuningCircle = (ImageView) findViewById(R.id.tune_notify);
+
+        //Get Desired Frequency
+        ((BaseApplication) getApplicationContext()).setFrequency(1);
+        desiredFrequency = ((BaseApplication) getApplicationContext()).getFrequency();
 
         // Set up button
         tuneButton = (Button) findViewById(R.id.start_button);
