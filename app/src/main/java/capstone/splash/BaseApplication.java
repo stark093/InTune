@@ -23,6 +23,7 @@ public class BaseApplication extends Application {
     static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     private String deviceName = "INTUNE2";
     private boolean initialConnection = true;
+    public double desiredFrequency;
 
 
     @Override
@@ -123,6 +124,56 @@ public class BaseApplication extends Application {
                 isBtConnected = true;
             }
         }
+    }
+
+    public void setFrequency(int string){
+        if (MainActivity.spinner_item == "Standard Tuning"){
+            if (string == 6){ // String E_1
+                desiredFrequency = 82.4;
+            } else if (string == 5){ // String A
+                desiredFrequency = 110.0;
+            } else if (string == 4){ // String D
+                desiredFrequency = 146.8;
+            } else if (string == 3){ // String G
+                desiredFrequency = 196.0;
+            } else if (string == 2){ // String B
+                desiredFrequency = 246.9;
+            } else if (string == 1){ // String E
+                desiredFrequency = 329.6;
+            }
+        } else if (MainActivity.spinner_item == "Drop D"){
+            if (string == 6){ // String E_1
+                desiredFrequency = 73.4;
+            } else if (string == 5){ // String A
+                desiredFrequency = 110.0;
+            } else if (string == 4){ // String D
+                desiredFrequency = 146.8;
+            } else if (string == 3){ // String G
+                desiredFrequency = 196.0;
+            } else if (string == 2){ // String B
+                desiredFrequency = 246.9;
+            } else if (string == 1){ // String E
+                desiredFrequency = 329.6;
+            }
+        } else if (MainActivity.spinner_item == "Double drop D"){
+            if (string == 6){ // String E_1
+                desiredFrequency = 73.4;
+            } else if (string == 5){ // String A
+                desiredFrequency = 110.0;
+            } else if (string == 4){ // String D
+                desiredFrequency = 146.8;
+            } else if (string == 3){ // String G
+                desiredFrequency = 196.0;
+            } else if (string == 2){ // String B
+                desiredFrequency = 246.9;
+            } else if (string == 1){ // String E
+                desiredFrequency = 293.7;
+            }
+        }
+    }
+
+    public double getFrequency(){
+        return desiredFrequency;
     }
 
     public void turnX(int X)

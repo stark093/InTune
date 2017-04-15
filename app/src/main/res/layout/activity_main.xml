@@ -143,11 +143,11 @@
         android:layout_width="150dp"
         android:background="@android:drawable/spinner_background"
         android:layout_height="40dp"
-        android:layout_marginBottom="13dp"
+        android:layout_marginBottom="21dp"
+        android:layout_marginLeft="44dp"
+        android:layout_marginStart="44dp"
         android:layout_above="@+id/DeviceButton"
-        android:layout_toLeftOf="@+id/button15"
-        android:layout_toStartOf="@+id/button15"
-        android:layout_marginRight="33dp"
-        android:layout_marginEnd="33dp" />
+        android:layout_toRightOf="@+id/button12"
+        android:layout_toEndOf="@+id/button12" />
 
 </RelativeLayout>

@@ -10,6 +10,10 @@
         <item>Open C</item>
         <item>Open G</item>
         <item>Open D</item>
+        <item>Drop D</item>
+        <item>Double drop D</item>
+        <item>Drop C#</item>
+        <item>Drop E</item>
     </string-array>
 
 </resources>
