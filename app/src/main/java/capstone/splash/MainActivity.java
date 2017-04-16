@@ -32,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
     public Button but6;
     public Button but7;
     public static String spinner_item;
-    private Spinner spinner1;
+    private Spinner spinner;
+    public int position;
 
 
 
@@ -44,23 +45,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         addListenerOnSpinnerItemSelection();
         init();
-
     }
 
     public void addListenerOnSpinnerItemSelection() {
-        spinner1 = (Spinner) findViewById(R.id.spinner1);
-        spinner1.setOnItemSelectedListener(new CustomOnItemSelectedListener());
+        spinner = (Spinner) findViewById(R.id.spinner1);
+        spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener());
+        spinner.setSelection(getIndex(spinner, ((BaseApplication) getApplicationContext()).getCurrentTuning()));
     }
 
     public class CustomOnItemSelectedListener implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
             spinner_item = parent.getItemAtPosition(pos).toString();
+            ((BaseApplication) getApplicationContext()).setTuning(spinner_item);
         }
 
         @Override
         public void onNothingSelected(AdapterView<?> arg0) {
-            // TODO Auto-generated method stub
+
         }
 
         @Override
@@ -127,6 +129,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(toy);
             }
         });
+    }
+
+    private int getIndex(Spinner spinner, String myString){
+
+        int index = 0;
+
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).equals(myString)){
+                index = i;
+            }
+        }
+        return index;
     }
 
 

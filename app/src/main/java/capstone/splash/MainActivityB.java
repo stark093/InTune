@@ -46,6 +46,10 @@ public class MainActivityB extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Get Desired Frequency
+        desiredFrequency = ((BaseApplication) getApplicationContext()).getFrequency(2);
+
         setContentView(R.layout.activity_main_b);
 
         updateGraphHandler = new Handler();
@@ -57,9 +61,7 @@ public class MainActivityB extends AppCompatActivity {
         currentFreqTextView = (TextView) findViewById(R.id.freq);
         doneTuningCircle = (ImageView) findViewById(R.id.tune_notify);
 
-        //Get Desired Frequency
-        ((BaseApplication) getApplicationContext()).setFrequency(2);
-        desiredFrequency = ((BaseApplication) getApplicationContext()).getFrequency();
+
 
         // Set up button
         tuneButton = (Button) findViewById(R.id.start_button);

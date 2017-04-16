@@ -23,8 +23,13 @@ public class BaseApplication extends Application {
     static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     private String deviceName = "INTUNE2";
     private boolean initialConnection = true;
-    public double desiredFrequency;
-
+    private double desiredFrequency_e = 82.4;
+    private double desiredFrequency_a = 110.0;;
+    private double desiredFrequency_d = 146.8;
+    private double desiredFrequency_g = 196.0;
+    private double desiredFrequency_b = 246.9;
+    private double desiredFrequency_e1 = 329.6;
+    private String currentTuning = "Standard Tuning";
 
     @Override
     public void onCreate(){
@@ -126,54 +131,50 @@ public class BaseApplication extends Application {
         }
     }
 
-    public void setFrequency(int string){
-        if (MainActivity.spinner_item == "Standard Tuning"){
-            if (string == 6){ // String E_1
-                desiredFrequency = 82.4;
-            } else if (string == 5){ // String A
-                desiredFrequency = 110.0;
-            } else if (string == 4){ // String D
-                desiredFrequency = 146.8;
-            } else if (string == 3){ // String G
-                desiredFrequency = 196.0;
-            } else if (string == 2){ // String B
-                desiredFrequency = 246.9;
-            } else if (string == 1){ // String E
-                desiredFrequency = 329.6;
-            }
-        } else if (MainActivity.spinner_item == "Drop D"){
-            if (string == 6){ // String E_1
-                desiredFrequency = 73.4;
-            } else if (string == 5){ // String A
-                desiredFrequency = 110.0;
-            } else if (string == 4){ // String D
-                desiredFrequency = 146.8;
-            } else if (string == 3){ // String G
-                desiredFrequency = 196.0;
-            } else if (string == 2){ // String B
-                desiredFrequency = 246.9;
-            } else if (string == 1){ // String E
-                desiredFrequency = 329.6;
-            }
-        } else if (MainActivity.spinner_item == "Double drop D"){
-            if (string == 6){ // String E_1
-                desiredFrequency = 73.4;
-            } else if (string == 5){ // String A
-                desiredFrequency = 110.0;
-            } else if (string == 4){ // String D
-                desiredFrequency = 146.8;
-            } else if (string == 3){ // String G
-                desiredFrequency = 196.0;
-            } else if (string == 2){ // String B
-                desiredFrequency = 246.9;
-            } else if (string == 1){ // String E
-                desiredFrequency = 293.7;
-            }
+    public String getCurrentTuning(){
+        return currentTuning;
+    }
+
+    public void setTuning(String tuning){
+        currentTuning=tuning;
+        if (tuning.equals("Standard Tuning")){
+            desiredFrequency_e = 82.4;
+            desiredFrequency_a = 110.0;
+            desiredFrequency_d = 146.8;
+            desiredFrequency_g = 196.0;
+            desiredFrequency_b = 246.9;
+            desiredFrequency_e1 = 329.6;
+        } else if (tuning.equals("Drop D")){
+            desiredFrequency_e = 73.4;
+            desiredFrequency_a = 110.0;
+            desiredFrequency_d = 146.8;
+            desiredFrequency_g = 196.0;
+            desiredFrequency_b = 246.9;
+            desiredFrequency_e1 = 329.6;
+        } else if (tuning.equals("Double drop D")){
+            desiredFrequency_e = 73.4;
+            desiredFrequency_a = 110.0;
+            desiredFrequency_d = 146.8;
+            desiredFrequency_g = 196.0;
+            desiredFrequency_b = 246.9;
+            desiredFrequency_e1 = 293.7;
         }
     }
 
-    public double getFrequency(){
-        return desiredFrequency;
+    public double getFrequency(int string) {
+        if (string == 6) {
+            return desiredFrequency_e1;
+        } else if (string == 5) {
+            return desiredFrequency_a;
+        } else if (string == 4) {
+            return desiredFrequency_d;
+        } else if (string == 3) {
+            return desiredFrequency_g;
+        } else if (string == 2) {
+            return desiredFrequency_b;
+        } else {
+            return desiredFrequency_e;
+        }
     }
 
     public void turnX(int X)
