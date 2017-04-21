@@ -24,7 +24,6 @@ public class MainActivityD extends AppCompatActivity {
     boolean done = false;
 
     double desiredFrequency;
-    int currentString = 4;
 
     int directionChoice = 1;
     int rotationNumber = 0;
@@ -188,7 +187,7 @@ public class MainActivityD extends AppCompatActivity {
 
     public void startTuning(){
         running = true;
-        pitch_algorithm = new Pitch_Algorithm(currentString);
+        pitch_algorithm = new Pitch_Algorithm(desiredFrequency);
         runningLoop.run();
         tuneButton.setText("STOP");
     }

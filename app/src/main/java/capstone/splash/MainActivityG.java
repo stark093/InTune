@@ -19,7 +19,6 @@ public class MainActivityG extends AppCompatActivity {
     ImageView doneTuningCircle;
     Button tuneButton;
     private long mLastClickTime = 0;
-    int test = 5;
 
 
     boolean running = false;
@@ -30,7 +29,6 @@ public class MainActivityG extends AppCompatActivity {
     double lastDifference = 0;
 
     double desiredFrequency;
-    int currentString = 3;
 
     private Draw_Graph graphingCanvas;
     private Handler updateGraphHandler;
@@ -187,7 +185,7 @@ public class MainActivityG extends AppCompatActivity {
 
     public void startTuning(){
         running = true;
-        pitch_algorithm = new Pitch_Algorithm(currentString);
+        pitch_algorithm = new Pitch_Algorithm(desiredFrequency);
         runningLoop.run();
         tuneButton.setText("STOP");
     }
