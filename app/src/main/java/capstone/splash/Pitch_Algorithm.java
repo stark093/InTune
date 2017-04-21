@@ -66,12 +66,13 @@ public class Pitch_Algorithm {
                 audioData = audioRecorder.getAudioData();
                 if(audioData!=null) {
                     freq = Signal_Processing.getMaxFreqMagnitude(audioData, desiredFrequency);
-                    System.out.println(freq[0]);
+
                 }else{
                     freq = new double[]{0,0};
                 }
                 if(freq[1]>1.5){
                     updateValues(freq[0]);
+                    System.out.println(freq[0]);
                 }
 //                graphingCanvas.updateGraph(signal_processor.getPlot(data,"cepstral"), false, false);
                 //endTime = System.currentTimeMillis();
