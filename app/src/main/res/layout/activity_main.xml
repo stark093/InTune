@@ -150,4 +150,16 @@
         android:layout_toRightOf="@+id/button12"
         android:layout_toEndOf="@+id/button12" />
 
+    <Switch
+        android:text="Automate:  "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/switch2"
+        android:textSize="18sp"
+        android:layout_alignBaseline="@+id/DeviceButton"
+        android:layout_alignBottom="@+id/DeviceButton"
+        android:layout_alignParentRight="true"
+        android:theme="@style/SwitchTheme"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

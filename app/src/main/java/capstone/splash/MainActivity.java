@@ -6,9 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -16,7 +18,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 import android.widget.ArrayAdapter;
 import android.view.View.OnClickListener;
@@ -33,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     public Button but7;
     public static String spinner_item;
     private Spinner spinner;
+    public Switch auto_switch;
     public int position;
 
 
@@ -78,6 +83,20 @@ public class MainActivity extends AppCompatActivity {
         but5 = (Button)findViewById(R.id.button14);
         but6 = (Button)findViewById(R.id.button5);
         but7 = (Button)findViewById(R.id.DeviceButton);
+        auto_switch = (Switch)findViewById(R.id.switch2);
+        if (BaseApplication.switch_flag_state == true){
+            auto_switch.toggle();
+        }
+        auto_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    ((BaseApplication) getApplicationContext()).setAutomateSwitch(true);
+                } else {
+                    ((BaseApplication) getApplicationContext()).setAutomateSwitch(false);
+                }
+            }
+        });
 
         but1.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -129,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(toy);
             }
         });
+
     }
 
     private int getIndex(Spinner spinner, String myString){

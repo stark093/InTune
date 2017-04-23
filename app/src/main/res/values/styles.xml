@@ -11,5 +11,9 @@
         <item name="android:textColorHint">@color/colorPrimary</item>
     </style>
 
+    <style name="SwitchTheme" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">#8A2BE2</item>
+        <item name="colorSwitchThumbNormal">#8A2BE2</item>
+    </style>
 
 </resources>

@@ -145,13 +145,18 @@ public class MainActivityD extends AppCompatActivity {
             pitch_algorithm = null;
         }
         updateImage();
-        Intent i = new Intent(MainActivityD.this, MainActivityG.class);
+        Intent i_auto = new Intent(MainActivityD.this, MainActivityG.class);
+        Intent i_main = new Intent(MainActivityD.this, MainActivity.class);
         try {
             sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        startActivity(i);
+        if (((BaseApplication) getApplicationContext()).getAutomateSwitch() == true){
+            startActivity(i_auto);
+        } else {
+            startActivity(i_main);
+        }
         finish();
     }
 

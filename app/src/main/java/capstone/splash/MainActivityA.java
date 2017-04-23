@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import java.lang.Math;
@@ -139,13 +140,18 @@ public class MainActivityA extends AppCompatActivity {
             pitch_algorithm = null;
         }
         updateImage();
-        Intent i = new Intent(MainActivityA.this, MainActivityD.class);
+        Intent i_auto = new Intent(MainActivityA.this, MainActivityD.class);
+        Intent i_main = new Intent(MainActivityA.this, MainActivity.class);
         try {
             sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        startActivity(i);
+        if (((BaseApplication) getApplicationContext()).getAutomateSwitch() == true){
+            startActivity(i_auto);
+        } else {
+            startActivity(i_main);
+        }
         finish();
     }
 

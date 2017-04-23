@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 import java.io.IOException;
 import java.util.Set;
@@ -29,12 +30,14 @@ public class BaseApplication extends Application {
     private double desiredFrequency_g = 196.0;
     private double desiredFrequency_b = 246.9;
     private double desiredFrequency_e1 = 329.6;
+    private boolean switch_flag = false;
+    static boolean switch_flag_state;
+    private boolean auto_toggle_switch = false;
     private String currentTuning = "Standard Tuning";
 
     @Override
     public void onCreate(){
         super.onCreate();
-
 
         new ConnectBT().execute();
 
@@ -133,6 +136,21 @@ public class BaseApplication extends Application {
 
     public String getCurrentTuning(){
         return currentTuning;
+    }
+
+    public void setAutomateSwitch(boolean auto_switch){
+        auto_toggle_switch = auto_switch;
+        if (auto_toggle_switch == true){
+            switch_flag = true;
+            switch_flag_state = switch_flag;
+        } else {
+            switch_flag = false;
+            switch_flag_state = switch_flag;
+        }
+    }
+
+    public boolean getAutomateSwitch(){
+        return switch_flag;
     }
 
     public void setTuning(String tuning){
