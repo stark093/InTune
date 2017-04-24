@@ -95,9 +95,9 @@ public class MainActivityD extends AppCompatActivity {
         }
 
         if(difference>0){
-            ((BaseApplication) getApplicationContext()).turnX((int)(directionChoice*difference*20.1+0));
+            ((BaseApplication) getApplicationContext()).turnX((int)(directionChoice*difference*11.8));
         }else{
-            ((BaseApplication) getApplicationContext()).turnX((int)(directionChoice*difference*10-10));
+            ((BaseApplication) getApplicationContext()).turnX((int)(directionChoice*difference*11.8));
         }
     }
 

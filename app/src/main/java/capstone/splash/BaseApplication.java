@@ -22,10 +22,10 @@ public class BaseApplication extends Application {
     private boolean isBtConnected = false;
     //SPP UUID. Look for it
     static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    private String deviceName = "INTUNE2";
+    private String deviceName = "INTUNE";
     private boolean initialConnection = true;
     private double desiredFrequency_e = 82.4;
-    private double desiredFrequency_a = 110.0;;
+    private double desiredFrequency_a = 110.0;
     private double desiredFrequency_d = 146.8;
     private double desiredFrequency_g = 196.0;
     private double desiredFrequency_b = 246.9;
@@ -55,10 +55,13 @@ public class BaseApplication extends Application {
     }
 
     private void resetConnection() {
+        if (btSocket != null) {
         try {
-            if (btSocket.getInputStream() != null) {
-                btSocket.getInputStream().close();
-            }
+
+                if (btSocket.getInputStream() != null) {
+                    btSocket.getInputStream().close();
+                }
+
         }
             catch (IOException e) {}
 
@@ -69,9 +72,9 @@ public class BaseApplication extends Application {
         }
         catch (IOException e) {}
 
-        if (btSocket != null) {
             try {btSocket.close();} catch (Exception e) {}
             btSocket = null;
+
         }
         isBtConnected = false;
     }
@@ -176,6 +179,48 @@ public class BaseApplication extends Application {
             desiredFrequency_g = 196.0;
             desiredFrequency_b = 246.9;
             desiredFrequency_e1 = 293.7;
+        } else if (tuning.equals("Open E")){
+            desiredFrequency_e = 82.4;
+            desiredFrequency_a = 123.5;
+            desiredFrequency_d = 164.8;
+            desiredFrequency_g = 207.7;
+            desiredFrequency_b = 246.9;
+            desiredFrequency_e1 = 329.6;
+        }else if (tuning.equals("Drop C#")){
+            desiredFrequency_e = 69.3;
+            desiredFrequency_a = 103.8;
+            desiredFrequency_d = 138.6;
+            desiredFrequency_g = 185;
+            desiredFrequency_b = 233.1;
+            desiredFrequency_e1 = 311.1;
+        }else if (tuning.equals("Open G")){
+            desiredFrequency_e = 73.4;
+            desiredFrequency_a = 98;
+            desiredFrequency_d = 146.8;
+            desiredFrequency_g = 196;
+            desiredFrequency_b = 246.9;
+            desiredFrequency_e1 = 293.7;
+        } else if (tuning.equals("Open D")){
+            desiredFrequency_e = 73.4;
+            desiredFrequency_a = 110;
+            desiredFrequency_d = 146.8;
+            desiredFrequency_g = 185;
+            desiredFrequency_b = 220;
+            desiredFrequency_e1 = 293.7;
+        }else if (tuning.equals("Open C")){
+            desiredFrequency_e = 65.4;
+            desiredFrequency_a = 98;
+            desiredFrequency_d = 130.8;
+            desiredFrequency_g = 196;
+            desiredFrequency_b = 261.6;
+            desiredFrequency_e1 = 329.6;
+        }else if (tuning.equals("Open A")){
+            desiredFrequency_e = 82.4;
+            desiredFrequency_a = 110;
+            desiredFrequency_d = 138.6;
+            desiredFrequency_g = 164.8;
+            desiredFrequency_b = 110;
+            desiredFrequency_e1 = 329.6;
         }
     }
 
