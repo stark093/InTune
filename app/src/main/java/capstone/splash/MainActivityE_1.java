@@ -7,6 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import java.lang.Math;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
 import android.content.Intent;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -64,7 +68,6 @@ public class MainActivityE_1 extends AppCompatActivity {
         tuneButton = (Button) findViewById(R.id.start_button);
         tuneButton.setOnClickListener(startListener);
 
-
         startTuning();
     }
 
@@ -121,27 +124,30 @@ public class MainActivityE_1 extends AppCompatActivity {
                 if(pitch_algorithm!=null) {
                     double[] frequencyInformation = pitch_algorithm.getFreq();
                     double freq = frequencyInformation[0];
-                    int sequenceNumber = (int)frequencyInformation[1];
+                    int sequenceNumber = (int) frequencyInformation[1];
 
-                    if(freq!=0) {
+                    if (freq != 0) {
                         double freqDifference = (desiredFrequency - freq);
-                        if(Math.abs(freqDifference)<0.5){
-                            done=true;
+                        if (Math.abs(freqDifference) < 0.5) {
+                            done = true;
+                            updateGraph(0.0);
                             doneTuning();
                         }
 
 
-                        if(sequenceNumber!=mostRecentSequenceNumber){
-                            if(!done) {
+                        if (sequenceNumber != mostRecentSequenceNumber) {
+                            if (!done) {
                                 rotate(freqDifference);
                             }
                             updateFrequency(freq);
                             mostRecentSequenceNumber = sequenceNumber;
                         }
-
                     }
-                    updateGraph(Math.abs(lastDifference));
-
+                    if ((desiredFrequency - freq) < 0.5) {
+                        updateGraph(0.0);
+                    } else {
+                        updateGraph(Math.abs(lastDifference));
+                    }
                 }
             } finally {
                 if(running)

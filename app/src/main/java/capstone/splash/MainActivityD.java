@@ -128,7 +128,11 @@ public class MainActivityD extends AppCompatActivity {
                         }
 
                     }
-                    updateGraph(Math.abs(lastDifference));
+                    if ((desiredFrequency - freq) < 0.5) {
+                        updateGraph(0.0);
+                    } else {
+                        updateGraph(Math.abs(lastDifference));
+                    }
 
                 }
             } finally {
