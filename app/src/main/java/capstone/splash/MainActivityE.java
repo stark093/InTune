@@ -47,7 +47,7 @@ public class MainActivityE extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //Get Desired Frequency
-        desiredFrequency = ((BaseApplication) getApplicationContext()).getFrequency(6);
+        desiredFrequency = ((BaseApplication) getApplicationContext()).getFrequency(1);
 
         setContentView(R.layout.activity_main_e);
 
@@ -94,10 +94,20 @@ public class MainActivityE extends AppCompatActivity {
             }
         }
         if(difference>0){
-            ((BaseApplication) getApplicationContext()).turnX((int)(directionChoice*difference*10.6922));
+            System.out.println(difference);
+            if(difference>3) {
+                ((BaseApplication) getApplicationContext()).turnX((int) (directionChoice * difference * 13.8851));
+            }else{
+                ((BaseApplication) getApplicationContext()).turnX((int) (directionChoice * 5));
+            }
         }else{
-            ((BaseApplication) getApplicationContext()).turnX((int)(directionChoice*difference*10.6922));
-        }
+            System.out.println(difference);
+            if(difference<-3) {
+                ((BaseApplication) getApplicationContext()).turnX((int) (directionChoice * difference * 10.5));
+            }else{
+                ((BaseApplication) getApplicationContext()).turnX((int) (directionChoice * 2));
+            }
+                    }
     }
 
     Runnable runningLoop = new Runnable(){

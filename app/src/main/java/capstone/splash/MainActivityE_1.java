@@ -47,7 +47,7 @@ public class MainActivityE_1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //Get Desired Frequency
-        desiredFrequency = ((BaseApplication) getApplicationContext()).getFrequency(1);
+        desiredFrequency = ((BaseApplication) getApplicationContext()).getFrequency(6);
 
         setContentView(R.layout.activity_main_e_1);
 
@@ -63,6 +63,7 @@ public class MainActivityE_1 extends AppCompatActivity {
         // Set up button
         tuneButton = (Button) findViewById(R.id.start_button);
         tuneButton.setOnClickListener(startListener);
+
 
         startTuning();
     }
@@ -92,9 +93,21 @@ public class MainActivityE_1 extends AppCompatActivity {
             }
         }
         if(difference>0){
-            ((BaseApplication) getApplicationContext()).turnX((int)(directionChoice*difference*18.8+10));
+            if(difference>3) {
+                ((BaseApplication) getApplicationContext()).turnX((int) (directionChoice * difference * 13.8851));
+            }else if(difference>2){
+                ((BaseApplication) getApplicationContext()).turnX((int) (directionChoice * 10));
+            }else{
+                ((BaseApplication) getApplicationContext()).turnX((int) (directionChoice * 5));
+            }
         }else{
-            ((BaseApplication) getApplicationContext()).turnX((int)(directionChoice*10.9*difference-10));
+            if(difference<-3) {
+                ((BaseApplication) getApplicationContext()).turnX((int) (directionChoice * difference * 10.5));
+            }else if(difference<-2){
+            ((BaseApplication) getApplicationContext()).turnX((int) (directionChoice * 10));
+        }else{
+            ((BaseApplication) getApplicationContext()).turnX((int) (directionChoice * 5));
+        }
         }
     }
 
@@ -103,6 +116,8 @@ public class MainActivityE_1 extends AppCompatActivity {
         public void run(){
             int delay = 50;
             try {
+
+
                 if(pitch_algorithm!=null) {
                     double[] frequencyInformation = pitch_algorithm.getFreq();
                     double freq = frequencyInformation[0];
@@ -142,16 +157,20 @@ public class MainActivityE_1 extends AppCompatActivity {
             pitch_algorithm = null;
         }
         updateImage();
-        Intent i_auto = new Intent(MainActivityE_1.this, MainActivityA.class);
-        Intent i_main = new Intent(MainActivityE_1.this, MainActivity.class);
+
         try {
-            sleep(1000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        Intent i_auto = new Intent(MainActivityE_1.this, MainActivityA.class);
+        Intent i_main = new Intent(MainActivityE_1.this, MainActivity.class);
+
         if (((BaseApplication) getApplicationContext()).getAutomateSwitch() == true){
             startActivity(i_auto);
         } else {
+
             startActivity(i_main);
         }
         finish();
@@ -167,6 +186,7 @@ public class MainActivityE_1 extends AppCompatActivity {
             graphArray[i] = graphAmplitude*Math.sin((i/4. + (phase)/7.));
         }
         graphingCanvas.updateGraph(graphArray,true,false);
+        graphingCanvas.postInvalidate();
     }
 
     public void updateFrequency(double frequencyToDisplay) {

@@ -73,6 +73,7 @@ public class Draw_Graph extends View {
         super.onDraw(canvas);
         canvas.drawRect(0,0,wGraph,hGraph,borderPaint);
         canvas.drawPath(path, linePaint);
+        postInvalidate();
     }
 
     @Override

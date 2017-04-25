@@ -26,7 +26,7 @@ public class Pitch_Algorithm {
     public Pitch_Algorithm(double desiredFrequencyIn){
         pitchAlgorithmMainHandler = new Handler();
         audioRecorder = new Audio_Record_Implementation();
-        audioRecorder.startRecording((int)(Math.pow(2,16+1)));
+        audioRecorder.startRecording((int)(Math.pow(2,15+1)));
         audioData = new double[audioRecorder.getAudioBufferSize()];
         desiredFrequency = desiredFrequencyIn;
 

@@ -89,9 +89,20 @@ public class MainActivityA extends AppCompatActivity {
             }
         }
         if(difference>0){
-            ((BaseApplication) getApplicationContext()).turnX((int)(directionChoice*difference*20.1+10));
+            if(difference>1) {
+                ((BaseApplication) getApplicationContext()).turnX((int) (directionChoice * difference * 15));
+            }else {
+                ((BaseApplication) getApplicationContext()).turnX((int) (directionChoice * 10));
+            }
         }else{
-            ((BaseApplication) getApplicationContext()).turnX((int)(directionChoice*difference*10-10));
+            if(difference<-5) {
+                ((BaseApplication) getApplicationContext()).turnX((int) (directionChoice * difference * 15));
+            }else if(difference<=-1){
+                ((BaseApplication) getApplicationContext()).turnX((int) (directionChoice * difference * 12
+                ));
+            }else{
+                ((BaseApplication) getApplicationContext()).turnX((int) (directionChoice * 10));
+            }
         }
     }
 

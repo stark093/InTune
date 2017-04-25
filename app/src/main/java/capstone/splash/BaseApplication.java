@@ -226,7 +226,7 @@ public class BaseApplication extends Application {
 
     public double getFrequency(int string) {
         if (string == 6) {
-            return desiredFrequency_e1;
+            return desiredFrequency_e;
         } else if (string == 5) {
             return desiredFrequency_a;
         } else if (string == 4) {
@@ -236,7 +236,7 @@ public class BaseApplication extends Application {
         } else if (string == 2) {
             return desiredFrequency_b;
         } else {
-            return desiredFrequency_e;
+            return desiredFrequency_e1;
         }
     }
 
